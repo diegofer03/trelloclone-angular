@@ -4,7 +4,7 @@ import LoginComponent from './pages/login/login.component';
 export const routes: Routes = [
   {
     path: 'login',
-    title: 'login',
+    title: 'Log in to Trello',
     component: LoginComponent
   }
 ];
