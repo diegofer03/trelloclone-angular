@@ -5,6 +5,11 @@ export const routes: Routes = [
   {
     path: 'login',
     title: 'Log in to Trello',
-    component: LoginComponent
+    loadComponent: () => import('./pages/login/login.component')
+  },
+  {
+    path: 'boards',
+    title: 'Boards',
+    loadComponent: () => import('./pages/boards/boards.component').then(m => m.BoardsComponent)
   }
 ];
