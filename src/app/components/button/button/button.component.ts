@@ -11,9 +11,9 @@ export class ButtonComponent {
   @Input() type : 'button' | 'reset' | 'submit' = 'button'
   @Input() bg : string = ''
 
-  getColors(){
+  get colors(){
     return{
-      'bg-success' : this.bg === 'success',
+      'bg-success' : this.bg === "success",
       'bg-blue-400' : this.bg === ''
     }
   }
