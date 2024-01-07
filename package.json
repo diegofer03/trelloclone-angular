@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:trello-clone": "node dist/trello-clone/server/server.mjs"
+    "serve:ssr:trello-clone": "node dist/trello-clone/server/server.mjs --open"
   },
   "private": true,
   "dependencies": {
