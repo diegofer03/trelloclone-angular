@@ -29,7 +29,13 @@
         </ul>
       </div>
     </div>
-    <div class="flex items-center">
+    <div class="flex items-center gap-x-2">
+      <button class="text-white">
+        <fa-icon [icon]="faBell"/>
+      </button>
+      <button class="text-white">
+        <fa-icon [icon]="faInfoCircle"/>
+      </button>
       <button
         type="button"
         class="flex rounded-full"
@@ -56,8 +62,7 @@
   (backdropClick)="isOpen = false"
   [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
   (detach)="isOpen = false"
-  [cdkConnectedOverlayPanelClass]="[]"
-  [cdkConnectedOverlayOffsetY]="0"
+  style="top: 30px; right: 0;"
 >
   <div
   class="z-50 my-4 w-60 text-base list-none bg-white rounded divide-y divide-gray-100 shadow "
