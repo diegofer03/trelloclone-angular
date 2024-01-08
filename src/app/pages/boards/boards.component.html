@@ -58,6 +58,23 @@
         </div>
       </cdk-accordion-item>
     </cdk-accordion>
+    <!-- dinamic accordion -->
+    <!-- <cdk-accordion>
+      <cdk-accordion-item #accordionMenuTest="cdkAccordionItem" *ngFor="let item of items">
+        <button class=" w-full py-1 px-2 flex justify-between items-center mb-4"
+        type="button" (click)="accordionMenuTest.toggle()">
+          {{item.label}} <span *ngIf="item.subItems"><fa-icon [icon]="accordionMenuTest.expanded ? faAngleDown : faAngleUp"/></span>
+        </button>
+        <div
+        *ngIf="item.subItems"
+        class="example-accordion-item-body"
+        [style.display]="accordionMenuTest.expanded ? '' : 'none'">
+          <ul class="ml-[3%] flex flex-col gap-y-4 text-sm text-gray-700">
+            <li *ngFor="let subItem of item.subItems" >{{subItem.label}}</li>
+          </ul>
+        </div>
+      </cdk-accordion-item>
+    </cdk-accordion> -->
   </div>
   <div class="w-full">
     <h1 class="text-lg font-bold mb-4"> <fa-icon [icon]="faClock"/> Recently viewed </h1>
