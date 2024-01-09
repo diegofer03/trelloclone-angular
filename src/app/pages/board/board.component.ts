@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import {CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { todo } from '../../models/app.models';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [NavbarComponent, DragDropModule, CdkDropList, CdkDrag, CommonModule],
+  imports: [NavbarComponent, DragDropModule, CdkDropList, CdkDrag, CommonModule, CdkDropListGroup],
   templateUrl: './board.component.html',
   styles: [
     `
@@ -49,12 +49,20 @@ export class BoardComponent {
       title: 'Buy a unicorn'
     },
     {
-      id: '2',
+      id: '3',
       title: 'Watch Angular Path in Platzi'
     }
   ];
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
+  doing = [{id: '1', title:'Get to work'}, {id: '2', title:'Pick up groceries'}];
+
+  done = [{id: '1', title:'Get up'}, {id: '2', title:'Brush teeth'}, {id: '3', title:'Take a shower'}];
+
+
+  drop(event: CdkDragDrop<any[]>) {
+    if(event.container === event.previousContainer) moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
+    else{
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
+    }
   }
 }
