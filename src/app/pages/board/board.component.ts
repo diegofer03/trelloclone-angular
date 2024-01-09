@@ -3,12 +3,12 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { column, todo } from '../../models/app.models';
 import { CommonModule } from '@angular/common';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [NavbarComponent, DragDropModule, CdkDropList, CdkDrag, CommonModule, CdkDropListGroup],
+  imports: [NavbarComponent, DragDropModule, CdkDropList, CdkDrag, CommonModule, CdkDropListGroup, ReactiveFormsModule],
   templateUrl: './board.component.html',
   styles: [
     `
@@ -40,7 +40,12 @@ import { FormControl } from '@angular/forms';
 })
 export class BoardComponent {
 
-  newColumn = new FormControl()
+  newColumn = new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+    ]
+  })
 
   columns : column[] = [
     {
@@ -72,7 +77,7 @@ export class BoardComponent {
       ]
     },
     {
-      title: 'todos',
+      title: 'done',
       todo: [
         {
           id: '1', title:'Get up'
@@ -88,7 +93,13 @@ export class BoardComponent {
   ]
 
   addColumn(){
-
+    if(this.newColumn.valid){
+      this.columns.push({
+        title: this.newColumn.value,
+        todo: []
+      })
+      this.newColumn.setValue('')
+    }
   }
 
   drop(event: CdkDragDrop<any[]>) {
