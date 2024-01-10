@@ -1,8 +1,17 @@
-import { Component, inject } from '@angular/core';
-import {DialogRef} from '@angular/cdk/dialog';
+import { Component, Inject, inject } from '@angular/core';
+import {DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
 import { faClose, faCheckToSlot, faBars, faUser, faTag, faCheckSquare, faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent } from '../button/button.component';
+import { todo } from '../../models/app.models';
+
+interface InputData {
+  todo: todo;
+}
+
+interface OutputData {
+  rta: boolean;
+}
 
 @Component({
   selector: 'app-dialog',
@@ -18,10 +27,18 @@ export class DialogComponent {
   faTag = faTag;
   faCheckSquare = faCheckSquare;
   faClock = faClock;
+  todo: todo
+  dialogRef = inject(DialogRef<OutputData>)
 
-  dialogRef = inject(DialogRef)
+  constructor(@Inject(DIALOG_DATA) data: InputData){
+    this.todo = data.todo
+  }
 
   close() {
     this.dialogRef.close();
+  }
+
+  closeWithRta(rta: boolean) {
+    this.dialogRef.close({ rta });
   }
 }

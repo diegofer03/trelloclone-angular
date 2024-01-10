@@ -112,10 +112,16 @@ export class BoardComponent {
     }
   }
 
-  openDialog() {
-    this.dialog.open(DialogComponent, {
+  openDialog(todo: todo) {
+    const ref = this.dialog.open(DialogComponent, {
       minWidth: '300px',
       maxWidth : '50%',
+      data: {
+        todo: todo
+      }
     });
+    ref.closed.subscribe(data => {
+      console.log(data)
+    })
   }
 }
