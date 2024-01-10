@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { column, todo } from '../../models/app.models';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [NavbarComponent, DragDropModule, CdkDropList, CdkDrag, CommonModule, CdkDropListGroup, ReactiveFormsModule],
+  imports: [NavbarComponent, DragDropModule, DialogModule, CdkDropList, CdkDrag, CommonModule, CdkDropListGroup, ReactiveFormsModule],
   templateUrl: './board.component.html',
   styles: [
     `
@@ -39,6 +41,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
   ]
 })
 export class BoardComponent {
+  dialog = inject(Dialog)
 
   newColumn = new FormControl('', {
     nonNullable: true,
@@ -107,5 +110,12 @@ export class BoardComponent {
     else{
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
     }
+  }
+
+  openDialog() {
+    this.dialog.open(DialogComponent, {
+      minWidth: '300px',
+      maxWidth : '50%',
+    });
   }
 }
