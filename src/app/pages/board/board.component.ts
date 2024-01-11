@@ -112,12 +112,13 @@ export class BoardComponent {
     }
   }
 
-  openDialog(todo: todo) {
+  openDialog(todo: todo, list: string) {
     const ref = this.dialog.open(DialogComponent, {
       minWidth: '300px',
       maxWidth : '50%',
       data: {
-        todo: todo
+        todo: todo,
+        list: list
       }
     });
     ref.closed.subscribe(data => {

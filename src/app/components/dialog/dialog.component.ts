@@ -7,6 +7,7 @@ import { todo } from '../../models/app.models';
 
 interface InputData {
   todo: todo;
+  list: string
 }
 
 interface OutputData {
@@ -28,10 +29,12 @@ export class DialogComponent {
   faCheckSquare = faCheckSquare;
   faClock = faClock;
   todo: todo
+  listTitle: string
   dialogRef = inject(DialogRef<OutputData>)
 
   constructor(@Inject(DIALOG_DATA) data: InputData){
     this.todo = data.todo
+    this.listTitle = data.list
   }
 
   close() {
