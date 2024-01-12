@@ -3,13 +3,7 @@ import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
-interface Product {
-  id: string;
-  title: string;
-  price: number;
-  images: string[];
-}
+import { Product } from '../../models/app.models';
 
 @Component({
   selector: 'app-scroll',
@@ -18,11 +12,11 @@ interface Product {
   templateUrl: './scroll.component.html'
 })
 export class ScrollComponent {
-  // private http = inject(HttpClient)
+  private http = inject(HttpClient)
 
-  constructor(private http : HttpClient){
+  // constructor(private http : HttpClient){
 
-  }
+  // }
 
   products : Product[] = []
   ngOnInit(){

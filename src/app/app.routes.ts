@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import LoginComponent from './pages/login/login.component';
+import { TableComponent } from './pages/table/table.component';
 
 export const routes: Routes = [
   {
@@ -21,5 +22,10 @@ export const routes: Routes = [
     path: 'scroll',
     title: 'Scroll test',
     loadComponent: () => import('./pages/scroll/scroll.component').then(m => m.ScrollComponent)
+  },
+  {
+    path: 'table',
+    title: 'table test',
+    loadComponent: () => import('./pages/table/table.component').then(m => m.TableComponent)
   }
 ];
