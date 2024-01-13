@@ -21,7 +21,7 @@
       <ng-container cdkColumnDef="weight">
         <th cdk-header-cell *cdkHeaderCellDef> Weight </th>
         <td cdk-cell *cdkCellDef="let element"> {{element.weight}} </td>
-        <td cdk-footer-cell class="py-3 px-6" *cdkFooterCellDef></td>
+        <td cdk-footer-cell class="py-3 px-6" *cdkFooterCellDef>{{total}}</td>
       </ng-container>
 
       <!-- Symbol Column -->

@@ -41,9 +41,7 @@ export class TableComponent {
 
   ngOnInit(){
     console.log(this.dataSource.data.value)
-    this.total = this.dataSource.data.value.map(item => item.weight).reduce(weight, total => {
-
-    })
+    this.total = this.dataSource.data.value.map(item => item.weight).reduce((weight, total) => weight + total, 0)
   }
 }
 
