@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {CdkTableModule} from '@angular/cdk/table';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { CommonModule } from '@angular/common';
 
 export interface PeriodicElement {
   name: string;
@@ -31,11 +32,19 @@ const ELEMENT_DATA: PeriodicElement[] = [
   selector: 'cdk-table-basic-example',
   templateUrl: './table.component.html',
   standalone: true,
-  imports: [CdkTableModule , NavbarComponent],
+  imports: [CdkTableModule , NavbarComponent, CommonModule],
 })
 export class TableComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new ExampleDataSource();
+  total : number = 0
+
+  ngOnInit(){
+    console.log(this.dataSource.data.value)
+    this.total = this.dataSource.data.value.map(item => item.weight).reduce(weight, total => {
+
+    })
+  }
 }
 
 /**
