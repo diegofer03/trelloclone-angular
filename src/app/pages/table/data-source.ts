@@ -2,7 +2,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import { PeriodicElement } from './table.component';
 import { DataSource } from '@angular/cdk/collections';
 
-export class ExampleDataSource extends DataSource<PeriodicElement> {
+export class ElementsDataSource extends DataSource<PeriodicElement> {
   /** Stream of data that is provided to the table. */
   data = new BehaviorSubject<PeriodicElement[]>([]);
 

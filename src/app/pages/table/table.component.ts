@@ -4,6 +4,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { ElementsDataSource } from './data-source';
 
 export interface PeriodicElement {
   name: string;
@@ -35,31 +36,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
   imports: [CdkTableModule , NavbarComponent, CommonModule],
 })
 export class TableComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new ExampleDataSource();
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'action'];
+  dataSource = new ElementsDataSource();
   total : number = 0
 
   ngOnInit(){
-    console.log(this.dataSource.data.value)
-    this.total = this.dataSource.data.value.map(item => item.weight).reduce((weight, total) => weight + total, 0)
-  }
-}
-
-/**
- * Data source to provide what data should be rendered in the table. Note that the data source
- * can retrieve its data in any way. In this case, the data source is provided a reference
- * to a common data base, ExampleDatabase. It is not the data source's responsibility to manage
- * the underlying data. Instead, it only needs to take the data and send the table exactly what
- * should be rendered.
- */
-export class ExampleDataSource extends DataSource<PeriodicElement> {
-  /** Stream of data that is provided to the table. */
-  data = new BehaviorSubject<PeriodicElement[]>(ELEMENT_DATA);
-
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<PeriodicElement[]> {
-    return this.data;
+    this.dataSource.init(ELEMENT_DATA)
+    this.total = this.dataSource.getTotal()
   }
 
-  disconnect() {}
+  update(element: PeriodicElement){
+    this.dataSource.update(element.position, {weight: 7})
+  }
 }
