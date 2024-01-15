@@ -47,5 +47,6 @@ export class TableComponent {
 
   update(element: PeriodicElement){
     this.dataSource.update(element.position, {weight: 7})
+    this.total = this.dataSource.getTotal()
   }
 }

@@ -41,7 +41,7 @@
       </ng-container>
 
       <tr cdk-header-row class="text-xs text-gray-700 uppercase bg-gray-50 "  *cdkHeaderRowDef="displayedColumns"></tr>
-      <tr cdk-row class="bg-white border-b" [ngClass]="{'bg-red-200': row.weight < 10}" *cdkRowDef="let row; columns: displayedColumns;"></tr>
+      <tr cdk-row class=" border-b" [ngClass]="{'bg-red-200': row.weight < 10}" *cdkRowDef="let row; columns: displayedColumns;"></tr>
       <tr cdk-footer-row class="text-xl text-gray-700 uppercase bg-gray-200 " *cdkFooterRowDef="displayedColumns"></tr>
     </table>
   </div>
