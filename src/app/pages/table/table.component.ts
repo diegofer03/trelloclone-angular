@@ -1,10 +1,11 @@
 import {DataSource} from '@angular/cdk/collections';
 import {Component} from '@angular/core';
 import {CdkTableModule} from '@angular/cdk/table';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, debounceTime} from 'rxjs';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { ElementsDataSource } from './data-source';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 export interface PeriodicElement {
   name: string;
@@ -33,16 +34,23 @@ const ELEMENT_DATA: PeriodicElement[] = [
   selector: 'cdk-table-basic-example',
   templateUrl: './table.component.html',
   standalone: true,
-  imports: [CdkTableModule , NavbarComponent, CommonModule],
+  imports: [CdkTableModule , NavbarComponent, CommonModule, ReactiveFormsModule],
 })
 export class TableComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'action'];
   dataSource = new ElementsDataSource();
   total : number = 0
+  input = new FormControl('', {nonNullable: true})
 
   ngOnInit(){
     this.dataSource.init(ELEMENT_DATA)
     this.total = this.dataSource.getTotal()
+
+    this.input.valueChanges.pipe(
+      debounceTime(300)
+    ).subscribe((query)=>{
+      this.dataSource.find(query)
+    })
   }
 
   update(element: PeriodicElement){
