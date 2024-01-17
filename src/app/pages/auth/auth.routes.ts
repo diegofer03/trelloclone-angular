@@ -20,5 +20,6 @@ export default [
     path: 'recovery',
     loadComponent: () => import('./recovery/recovery.component').then(m => m.RecoveryComponent),
     title: 'Recuperar'
-  }
+  },
+  // {path: 'login', pathMatch : 'full', redirectTo: ''},
 ] as Routes ;
