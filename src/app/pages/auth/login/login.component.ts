@@ -36,8 +36,15 @@ export default class LoginComponent {
     if (this.form.valid) {
       this.status = 'loading';
       const { email, password } = this.form.getRawValue();
-      console.log(email)
-      // TODO
+      this.authService.login(email, password).subscribe(
+        { next: (data) => {
+          this.router.navigate(['/boards'])
+        },
+        error: (error) =>{
+
+        }
+        }
+      )
     } else {
       this.form.markAllAsTouched();
     }

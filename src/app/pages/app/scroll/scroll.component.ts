@@ -1,9 +1,9 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { Component, inject } from '@angular/core';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Product } from '../../models/app.models';
+import { Product } from '../../../models/app.models';
 
 @Component({
   selector: 'app-scroll',

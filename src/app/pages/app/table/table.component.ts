@@ -2,7 +2,7 @@ import {DataSource} from '@angular/cdk/collections';
 import {Component} from '@angular/core';
 import {CdkTableModule} from '@angular/cdk/table';
 import {BehaviorSubject, Observable, debounceTime} from 'rxjs';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { ElementsDataSource } from './data-source';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
