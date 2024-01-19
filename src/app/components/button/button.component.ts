@@ -10,6 +10,7 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input() type : 'button' | 'reset' | 'submit' = 'button'
   @Input() bg : string = ''
+  @Input() disabled : boolean = false
 
   get colors(){
     return{

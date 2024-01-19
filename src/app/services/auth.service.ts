@@ -11,7 +11,7 @@ export class AuthService {
   constructor() { }
 
   login(email: string, pass: string){
-    return this.http.post(`${this.apiUrl}/api/v1/auth/login`, {
+    return this.http.post(`${this.apiUrl}api/v1/auth/login`, {
       email,
       pass
     });

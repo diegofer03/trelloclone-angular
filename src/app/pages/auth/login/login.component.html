@@ -44,8 +44,14 @@
           </p>
         </div>
       </div>
+        <p
+            *ngIf="status === 'failed'"
+            class="font-medium text-center text-red-500 text-xs mt-1 ml-1"
+          >
+            Error en credenciales
+        </p>
       <div>
-        <app-button type="submit" bg="success" class="w-full">
+        <app-button type="submit" bg="success" [disabled]="status === 'loading'" class="w-full" (click)="doLogin()">
           <span class="bg-success">
             Continue
           </span>

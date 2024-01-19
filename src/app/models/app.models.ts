@@ -14,3 +14,5 @@ export interface Product {
   price: number;
   images: string[];
 }
+
+export type status = 'init' | 'success' | 'failed' | 'loading'
