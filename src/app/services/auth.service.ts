@@ -5,7 +5,7 @@ import { enviroment } from '../../enviroments/enviroment';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthService {
   http = inject(HttpClient)
   apiUrl = enviroment.API_URL
   constructor() { }

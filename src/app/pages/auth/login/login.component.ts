@@ -5,6 +5,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { faEye, faEyeSlash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
 export default class LoginComponent {
   formBuilder = inject(FormBuilder)
   router = inject(Router)
+  authService = inject(AuthService)
 
   form = this.formBuilder.nonNullable.group({
     email: ['', [Validators.email, Validators.required]],
