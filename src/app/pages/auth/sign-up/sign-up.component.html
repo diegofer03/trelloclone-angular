@@ -1,25 +1,89 @@
 <div class="bg-white rounded sm:shadow py-4 px-8 text-sm">
   <div class="mb-4 px-2">
     <h1 class="text-center font-semibold pt-4 pb-8">Sign up to Trello</h1>
-    <form action="" class="space-y-4 font-light" >
+    <form action="" (ngSubmit)="register()" class="space-y-4 font-light" [formGroup]="form">
       <div class="">
-        <input type="email" placeholder="Enter full name"
-        class="w-full text-sm  rounded bg-[#fafbfc] border-2 border-gray-300">
+        <input type="name" placeholder="Enter name" formControlName="name"
+        class="w-full text-sm px-[12px] py-[8px] rounded bg-[#fafbfc] border-2 border-gray-300">
+        <div *ngIf="form.controls.name.touched && form.controls.name.invalid">
+          <p
+            *ngIf="form.controls.name.hasError('required')"
+            class="font-medium text-red-500 text-xs mt-1 ml-1"
+          >
+            This field is mandatory
+          </p>
+        </div>
       </div>
       <div class="">
-        <input type="email" placeholder="Enter email"
+        <input type="email" placeholder="Enter email" formControlName="email"
         class="w-full text-sm  rounded bg-[#fafbfc] border-2 border-gray-300">
-      </div>
-      <div class="">
-        <input type="password" placeholder="Enter password"
-        class="w-full text-sm rounded bg-[#fafbfc] border-2 border-gray-300">
+        <div *ngIf="form.controls.email.touched && form.controls.email.invalid">
+          <p
+            *ngIf="form.controls.email.hasError('required')"
+            class="font-medium text-red-500 text-xs mt-1 ml-1"
+          >
+            This field is mandatory
+          </p>
+          <p
+            *ngIf="form.controls.email.hasError('email')"
+            class="font-medium text-red-500 text-xs mt-1 ml-1"
+          >
+            This field should be a email
+          </p>
+        </div>
       </div>
       <div class="relative">
-        <input type="email" placeholder="Repeat email"
+        <input [type]="showPassword ? 'text' : 'password'"  placeholder="Enter password" formControlName="password"
+        class="w-full text-sm rounded bg-[#fafbfc] border-2 border-gray-300">
+        <button type="button" class="p-2 absolute right-2" (click)="showPassword = !showPassword">
+          <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
+        </button>
+        <div *ngIf="form.controls.password.touched && form.controls.password.invalid">
+          <p
+            *ngIf="form.controls.password.hasError('required')"
+            class="font-medium text-red-500 text-xs mt-1 ml-1"
+          >
+            This field is mandatory
+          </p>
+          <p
+            *ngIf="form.controls.password.hasError('minlength')"
+            class="font-medium text-red-500 text-xs mt-1 ml-1"
+          >
+            This field should be greater than 8 characters
+          </p>
+        </div>
+      </div>
+      <div class="relative">
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="Repeat password" formControlName="confirmPass"
         class="w-full text-sm  rounded bg-[#fafbfc] border-2 border-gray-300">
+        <button type="button" class="p-2 absolute right-2" (click)="showPassword = !showPassword">
+          <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
+        </button>
+        <div *ngIf="form.controls.confirmPass.touched && form.controls.confirmPass.invalid">
+          <p
+            *ngIf="form.controls.confirmPass.hasError('required')"
+            class="font-medium text-red-500 text-xs mt-1 ml-1"
+          >
+            This field is mandatory
+          </p>
+          <p
+            *ngIf="form.controls.confirmPass.hasError('minlength')"
+            class="font-medium text-red-500 text-xs mt-1 ml-1"
+          >
+            This field should be greater than 8 characters
+          </p>
+        </div>
+        <div *ngIf="form.controls.confirmPass.touched">
+          <p
+            *ngIf="form.hasError('mismatch')"
+            class="font-medium text-red-500 text-xs mt-1 ml-1"
+          >
+            The password are not the same
+          </p>
+        </div>
       </div>
       <div>
-        <app-button type="submit" bg="success" class="w-full">
+        <app-button type="submit" bg="success" class="w-full" [disabled]="status === 'loading'" [loading]="status === 'loading'">
           <span class="bg-success">
             Continue
           </span>

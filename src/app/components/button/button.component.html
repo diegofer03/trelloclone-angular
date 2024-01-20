@@ -2,6 +2,12 @@
   class="text-white w-full px-5 py-2 font-medium rounded text-sm"
   [ngClass]="colors"
   [type]="type"
-  [disabled]="disabled">
+  [disabled]="disabled || loading">
+  <fa-icon
+    *ngIf="loading"
+    class="mr-2"
+    [icon]="faSpinner"
+    [pulse]="true"
+  ></fa-icon>
   <ng-content/>
 </button>

@@ -16,4 +16,12 @@ export class AuthService {
       pass
     });
   }
+
+  register(email: string, name: string, password: string){
+    return this.http.post(`${this.apiUrl}api/v1/auth/register`, {
+      email,
+      password,
+      name
+    });
+  }
 }
