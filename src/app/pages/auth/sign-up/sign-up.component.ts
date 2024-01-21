@@ -57,13 +57,14 @@ export class SignupComponent {
     if(this.form.valid){
       this.status = 'loading'
       const { name, email, password} = this.form.getRawValue()
-      this.authService.register(email, name, password).subscribe({
+      this.authService.registerAndLogin(email, name, password).subscribe({
         next: (data) =>{
           this.status = 'success'
-          this.route.navigate(['/login'])
+          this.route.navigate(['/boards'])
         },
         error: (error) => {
           this.status = 'failed'
+          this.route.navigate(['/boards'])
           console.log(error)
         }
       })
