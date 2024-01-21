@@ -33,6 +33,10 @@ export class SignupComponent {
   authService = inject(AuthService)
   route = inject(Router)
 
+  formUser = this.formBuilder.nonNullable.group({
+    email: ['', [Validators.required, Validators.email]],
+  })
+
   form = this.formBuilder.nonNullable.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
@@ -43,6 +47,7 @@ export class SignupComponent {
   })
 
   status: status = 'init'
+  statusUser:boolean = true
   faPen = faPen
   faEye = faEye;
   faEyeSlash = faEyeSlash;
@@ -63,5 +68,26 @@ export class SignupComponent {
         }
       })
     }else this.form.markAllAsTouched()
+  }
+
+  validateUser() {
+    if (this.form.controls.email.valid) {
+      const { email } = this.form.getRawValue();
+      this.authService.isAvailable(email)
+      .subscribe({
+        next: (rta:any) => {
+          if (rta.isAvailable) {
+            this.statusUser = true;
+          } else {
+            this.statusUser = false;
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 }

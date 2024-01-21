@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="">
-        <input type="email" placeholder="Enter email" formControlName="email"
+        <input type="email" placeholder="Enter email" formControlName="email" (change)="validateUser()"
         class="w-full text-sm  rounded bg-[#fafbfc] border-2 border-gray-300">
         <div *ngIf="form.controls.email.touched && form.controls.email.invalid">
           <p
@@ -31,6 +31,12 @@
             This field should be a email
           </p>
         </div>
+        <p
+          *ngIf="!statusUser"
+          class="font-medium text-red-500 text-xs mt-1 ml-1"
+        >
+          Email is already in use
+        </p>
       </div>
       <div class="relative">
         <input [type]="showPassword ? 'text' : 'password'"  placeholder="Enter password" formControlName="password"
