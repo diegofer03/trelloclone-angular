@@ -44,4 +44,8 @@ export class AuthService {
       email
     });
   }
+
+  changePassword(token: string, newPassword: string) {
+    return this.http.post(`${this.apiUrl}/api/v1/auth/change-password`, { token, newPassword });
+  }
 }
