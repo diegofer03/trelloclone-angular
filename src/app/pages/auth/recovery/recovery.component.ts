@@ -72,6 +72,7 @@ export class RecoveryComponent {
         },
         error: error => {
           this.status = 'failed';
+          this.router.navigate(['/login']);
         }
       })
     }
