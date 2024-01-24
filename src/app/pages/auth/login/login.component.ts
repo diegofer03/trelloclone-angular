@@ -32,7 +32,7 @@ export default class LoginComponent {
 
   constructor(
   ) {
-    console.log(-700000+250002+233571.6+217671.3+202334.1+187479.9+224664)
+
    }
 
   // email: nicolas@mail.comm
