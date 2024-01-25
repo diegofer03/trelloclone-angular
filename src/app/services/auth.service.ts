@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroment';
-import { switchMap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
+import { SessionService } from './session.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   http = inject(HttpClient)
+  sessionService = inject(SessionService)
   apiUrl = enviroment.API_URL
   constructor() { }
 
@@ -15,7 +17,11 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}api/v1/auth/login`, {
       email,
       pass
-    });
+    }).pipe(
+      tap(response => {
+        this.sessionService.saveToken('prueba123')
+      })
+    );
   }
 
   register(email: string, name: string, password: string){

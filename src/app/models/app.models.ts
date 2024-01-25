@@ -16,3 +16,8 @@ export interface Product {
 }
 
 export type status = 'init' | 'success' | 'failed' | 'loading'
+
+export interface ResponseLogin {
+  access_token: string;
+  refresh_token: string;
+}

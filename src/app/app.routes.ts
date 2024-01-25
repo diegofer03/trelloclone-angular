@@ -3,6 +3,7 @@ import LoginComponent from './pages/auth/login/login.component';
 import { TableComponent } from './pages/app/table/table.component';
 import AuthComponent from './pages/auth/auth.component';
 import { HomeComponent } from './pages/app/home.component';
+import { tokenGuard } from './guards/token.guard';
 
 export const routes: Routes = [
   // Redirect empty path to '/example'
@@ -16,6 +17,7 @@ export const routes: Routes = [
   },
   {
     path: '',
+    canActivate: [tokenGuard],
     component: HomeComponent,
     children: [
       {path: '', loadChildren: () => import('./pages/app/home.routes')},
