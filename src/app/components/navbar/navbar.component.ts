@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBell, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +13,14 @@ import { faBell, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
+  authService = inject(AuthService)
+  router = inject(Router)
   faBell = faBell
   faInfoCircle = faInfoCircle
   isOpen = false;
+
+  logout(){
+    this.authService.logout()
+    this.router.navigate(['/login'])
+  }
 }

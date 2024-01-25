@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import { status } from '../../../models/app.models';
+import { SessionService } from '../../../services/session.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export default class LoginComponent {
   formBuilder = inject(FormBuilder)
   router = inject(Router)
   authService = inject(AuthService)
+  sessionService = inject(SessionService)
 
   form = this.formBuilder.nonNullable.group({
     email: ['', [Validators.email, Validators.required]],
@@ -48,6 +50,7 @@ export default class LoginComponent {
           this.router.navigate(['/boards'])
         },
         error: (error) =>{
+          this.sessionService.saveToken('prueba123')
           this.status = 'failed'
           this.router.navigate(['/boards'])
         }

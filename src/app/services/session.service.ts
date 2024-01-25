@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { getCookie, removeCookie, setCookie } from 'typescript-cookie';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +9,14 @@ import { BehaviorSubject } from 'rxjs';
 export class SessionService {
 
   saveToken(token: string){
-    window.localStorage.setItem('token', token)
+    setCookie('token',token, {expires: 365, path:'/login'})
   }
 
   getToken(){
-    return window.localStorage.getItem('token')
+    return getCookie('token')
   }
 
   removeToken(){
-    window.localStorage.removeItem('token')
+    removeCookie('token')
   }
 }
