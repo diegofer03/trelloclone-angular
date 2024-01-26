@@ -51,6 +51,14 @@ export class AuthService {
     });
   }
 
+  profile(token: string){
+    return this.http.get(`${this.apiUrl}api/v1/auth/profile`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
+
   changePassword(token: string, newPassword: string) {
     return this.http.post(`${this.apiUrl}api/v1/auth/change-password`, { token, newPassword });
   }
