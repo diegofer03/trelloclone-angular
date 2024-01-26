@@ -13,6 +13,7 @@ export class SessionService {
   }
 
   getToken(){
+    console.log(getCookie('token'))
     return getCookie('token')
   }
 

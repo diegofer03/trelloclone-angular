@@ -1,12 +1,14 @@
-import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { inject } from '@angular/core';
 import { SessionService } from '../services/session.service';
 
-export const tokenGuard: CanActivateFn = (route, state) => {
-  const token = inject(SessionService).getToken()
-  if(!token){
-    inject(Router).navigate(['/login']);
-    return false;
+export const tokenGuard: CanActivateFn = () => {
+  const token = inject(SessionService).getToken();
+  const router = inject(Router);
+  console.log(token)
+  console.log('reditect to login')
+  if (!token) {
+    router.navigate(['/login']);
   }
   return true;
 };
