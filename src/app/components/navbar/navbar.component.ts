@@ -19,8 +19,15 @@ export class NavbarComponent {
   faInfoCircle = faInfoCircle
   isOpen = false;
 
+  // user$ = this.authService.user$
+
   logout(){
     this.authService.logout()
     this.router.navigate(['/login'])
+    // this.authService.user$.subscribe({
+    //   next: user =>{
+    //     user = user
+    //   }
+    // })
   }
 }

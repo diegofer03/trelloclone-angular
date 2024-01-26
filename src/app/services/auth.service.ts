@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroment';
-import { switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { SessionService } from './session.service';
 
 @Injectable({
@@ -11,6 +11,8 @@ export class AuthService {
   http = inject(HttpClient)
   sessionService = inject(SessionService)
   apiUrl = enviroment.API_URL
+  user$ = new BehaviorSubject(null)
+
   constructor() { }
 
   login(email: string, pass: string){
@@ -56,7 +58,11 @@ export class AuthService {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    })
+    }).pipe(
+      tap((response:any) => {
+        this.user$.next(response)
+      })
+    )
   }
 
   changePassword(token: string, newPassword: string) {
