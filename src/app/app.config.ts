@@ -3,8 +3,13 @@ import { PreloadAllModules, provideRouter, withPreloading } from '@angular/route
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { tokenInterceptor } from './interceptors/token.interceptor';
+import { errorsInterceptor } from './interceptors/errors.interceptor';
 // provideHttpClient(withFetch())
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes, withPreloading(PreloadAllModules)), provideClientHydration(), provideHttpClient()]
+  providers: [provideRouter(routes,
+    withPreloading(PreloadAllModules)),
+    provideClientHydration(),
+    provideHttpClient(withInterceptors([tokenInterceptor, errorsInterceptor]))]
 };
