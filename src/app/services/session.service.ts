@@ -22,8 +22,34 @@ export class SessionService {
     removeCookie('token')
   }
 
+  saveRefreshToken(Refreshtoken: string){
+    setCookie('Refreshtoken',Refreshtoken, {expires: 365, path:'/login'})
+  }
+
+  getRefreshToken(){
+    console.log(getCookie('Refreshtoken'))
+    return getCookie('Refreshtoken')
+  }
+
+  removeRefreshToken(){
+    removeCookie('Refreshtoken')
+  }
+
   isValid(){
     const token = getCookie('token')
+    if(!token) return false
+    const decodeToken = jwtDecode<JwtPayload>(token)
+    if(decodeToken && decodeToken.exp){
+      const tokenDate = new Date(0)
+      tokenDate.setUTCSeconds(decodeToken.exp)
+      const now = new Date()
+      return tokenDate.getTime() > now.getTime()
+    }
+    return false
+  }
+
+  isRefreshValid(){
+    const token = getCookie('Refreshtoken')
     if(!token) return false
     const decodeToken = jwtDecode<JwtPayload>(token)
     if(decodeToken && decodeToken.exp){

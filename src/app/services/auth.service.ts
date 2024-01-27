@@ -22,6 +22,17 @@ export class AuthService {
     }).pipe(
       tap(response => {
         this.sessionService.saveToken('prueba123')
+        this.sessionService.saveRefreshToken('prueba123')
+      })
+    );
+  }
+
+  refreshToken(refreshToken: string) {
+    return this.http.post(`${this.apiUrl}/api/v1/auth/refresh-token`, {refreshToken})
+    .pipe(
+      tap(response => {
+        this.sessionService.saveToken('prueba123');
+        this.sessionService.saveRefreshToken('prueba123');
       })
     );
   }

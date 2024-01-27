@@ -5,7 +5,7 @@ import { inject } from '@angular/core';
 export const redirectsGuard: CanActivateFn = ( state) => {
   const sessionService = inject(SessionService)
   const route = inject(Router)
-  const token = sessionService.isValid()
+  const token = sessionService.isRefreshValid()
   console.log(token)
   console.log('reditect to app')
   if(token){
