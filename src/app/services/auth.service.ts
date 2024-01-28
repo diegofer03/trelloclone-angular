@@ -15,14 +15,15 @@ export class AuthService {
 
   constructor() { }
 
-  login(email: string, pass: string){
+  login(email: string, password: string){
     return this.http.post(`${this.apiUrl}api/v1/auth/login`, {
       email,
-      pass
+      password
     }).pipe(
-      tap(response => {
-        this.sessionService.saveToken('prueba123')
-        this.sessionService.saveRefreshToken('prueba123')
+      tap((response:any) => {
+        console.log(response)
+        this.sessionService.saveToken(response.access_token)
+        this.sessionService.saveRefreshToken(response.refresh_token)
       })
     );
   }
@@ -30,9 +31,9 @@ export class AuthService {
   refreshToken(refreshToken: string) {
     return this.http.post(`${this.apiUrl}/api/v1/auth/refresh-token`, {refreshToken})
     .pipe(
-      tap(response => {
-        this.sessionService.saveToken('prueba123');
-        this.sessionService.saveRefreshToken('prueba123');
+      tap((response:any) => {
+        this.sessionService.saveToken(response.access_token)
+        this.sessionService.saveRefreshToken(response.refresh_token)
       })
     );
   }

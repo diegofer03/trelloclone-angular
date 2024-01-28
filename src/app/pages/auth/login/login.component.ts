@@ -50,9 +50,7 @@ export default class LoginComponent {
           this.router.navigate(['/boards'])
         },
         error: (error) =>{
-          this.sessionService.saveToken('prueba123')
           this.status = 'failed'
-          this.router.navigate(['/boards'])
         }
         }
       )

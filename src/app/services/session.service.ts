@@ -14,7 +14,6 @@ export class SessionService {
   }
 
   getToken(){
-    console.log(getCookie('token'))
     return getCookie('token')
   }
 
@@ -27,7 +26,6 @@ export class SessionService {
   }
 
   getRefreshToken(){
-    console.log(getCookie('Refreshtoken'))
     return getCookie('Refreshtoken')
   }
 
