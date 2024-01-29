@@ -21,7 +21,6 @@ export class AuthService {
       password
     }).pipe(
       tap((response:any) => {
-        console.log(response)
         this.sessionService.saveToken(response.access_token)
         this.sessionService.saveRefreshToken(response.refresh_token)
       })
@@ -83,5 +82,6 @@ export class AuthService {
 
   logout(){
     this.sessionService.removeToken()
+    this.sessionService.removeRefreshToken()
   }
 }

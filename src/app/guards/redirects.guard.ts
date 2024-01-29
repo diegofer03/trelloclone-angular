@@ -9,7 +9,7 @@ export const redirectsGuard: CanActivateFn = ( state) => {
   console.log(token)
   console.log('reditect to app')
   if(token){
-    route.navigate(['/boards']);
+    route.navigate(['/home/boards']);
   }
   return true;
 };

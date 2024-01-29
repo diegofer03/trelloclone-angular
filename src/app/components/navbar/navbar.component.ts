@@ -4,12 +4,12 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBell, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ButtonComponent, OverlayModule, FontAwesomeModule],
+  imports: [ButtonComponent, OverlayModule, FontAwesomeModule, RouterLink],
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {

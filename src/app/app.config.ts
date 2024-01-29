@@ -11,6 +11,6 @@ import { validTokenInterceptor } from './interceptors/valid-token.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes,
     withPreloading(PreloadAllModules)),
-    provideClientHydration(),
-    provideHttpClient(withInterceptors([tokenInterceptor, errorsInterceptor, validTokenInterceptor]))]
+    // provideClientHydration(),
+    provideHttpClient(withInterceptors([]))]
 };

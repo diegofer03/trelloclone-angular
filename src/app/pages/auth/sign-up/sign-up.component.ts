@@ -60,11 +60,11 @@ export class SignupComponent {
       this.authService.registerAndLogin(email, name, password).subscribe({
         next: (data) =>{
           this.status = 'success'
-          this.route.navigate(['/boards'])
+          this.route.navigate(['/home/boards'])
         },
         error: (error) => {
           this.status = 'failed'
-          this.route.navigate(['/boards'])
+          this.route.navigate(['/home/boards'])
           console.log(error)
         }
       })

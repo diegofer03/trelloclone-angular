@@ -10,7 +10,7 @@ import { getCookie, removeCookie, setCookie } from 'typescript-cookie';
 export class SessionService {
 
   saveToken(token: string){
-    setCookie('token',token, {expires: 365, path:'/login'})
+   setCookie('token',token, {expires: 365, path:'/'})
   }
 
   getToken(){
@@ -22,7 +22,7 @@ export class SessionService {
   }
 
   saveRefreshToken(Refreshtoken: string){
-    setCookie('Refreshtoken',Refreshtoken, {expires: 365, path:'/login'})
+    setCookie('Refreshtoken',Refreshtoken, {expires: 365, path:'/'})
   }
 
   getRefreshToken(){

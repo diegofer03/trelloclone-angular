@@ -18,8 +18,8 @@ export const routes: Routes = [
     ]
   },
   {
-    path: '',
-    canActivate: [],
+    path: 'home',
+    canActivate: [tokenGuard],
     component: HomeComponent,
     children: [
       {path: '', loadChildren: () => import('./pages/app/home.routes')},

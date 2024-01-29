@@ -47,7 +47,7 @@ export default class LoginComponent {
       this.authService.login(email, password).subscribe(
         { next: (data) => {
           this.status = 'success'
-          this.router.navigate(['/boards'])
+          this.router.navigate(['/home/boards'])
         },
         error: (error) =>{
           this.status = 'failed'
