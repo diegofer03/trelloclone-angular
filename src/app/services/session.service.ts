@@ -14,7 +14,8 @@ export class SessionService {
   }
 
   getToken(){
-    return getCookie('token')
+    const token = getCookie('token',{})
+    return token
   }
 
   removeToken(){
@@ -26,7 +27,8 @@ export class SessionService {
   }
 
   getRefreshToken(){
-    return getCookie('Refreshtoken')
+    const token = getCookie('Refreshtoken')
+    return token
   }
 
   removeRefreshToken(){
@@ -54,6 +56,7 @@ export class SessionService {
       const tokenDate = new Date(0)
       tokenDate.setUTCSeconds(decodeToken.exp)
       const now = new Date()
+      console.log('refresh valid',tokenDate.getTime() > now.getTime())
       return tokenDate.getTime() > now.getTime()
     }
     return false

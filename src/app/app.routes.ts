@@ -11,7 +11,7 @@ export const routes: Routes = [
   {path: '', pathMatch : 'full', redirectTo: 'login'},
   {
     path: '',
-    canActivate: [redirectsGuard],
+    // canActivate: [redirectsGuard],
     component: AuthComponent,
     children: [
       {path: '', loadChildren: () => import('./pages/auth/auth.routes')},
@@ -19,7 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    canActivate: [tokenGuard],
+    // canActivate: [tokenGuard],
     component: HomeComponent,
     children: [
       {path: '', loadChildren: () => import('./pages/app/home.routes')},
