@@ -21,3 +21,10 @@ export interface ResponseLogin {
   access_token: string;
   refresh_token: string;
 }
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+}

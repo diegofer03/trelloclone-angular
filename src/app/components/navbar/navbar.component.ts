@@ -5,11 +5,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBell, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ButtonComponent, OverlayModule, FontAwesomeModule, RouterLink],
+  imports: [ButtonComponent, OverlayModule, FontAwesomeModule, RouterLink, CommonModule],
   templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
@@ -19,7 +20,7 @@ export class NavbarComponent {
   faInfoCircle = faInfoCircle
   isOpen = false;
 
-  // user$ = this.authService.user$
+  user$ = this.authService.user$
 
   logout(){
     this.authService.logout()

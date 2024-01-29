@@ -3,15 +3,16 @@ import { Injectable, inject } from '@angular/core';
 import { enviroment } from '../../enviroments/enviroment';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { SessionService } from './session.service';
+import { User } from '../models/app.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  http = inject(HttpClient)
-  sessionService = inject(SessionService)
-  apiUrl = enviroment.API_URL
-  user$ = new BehaviorSubject(null)
+  private http = inject(HttpClient)
+  private sessionService = inject(SessionService)
+  private apiUrl = enviroment.API_URL
+  user$ = new BehaviorSubject< User | null>(null)
 
   constructor() { }
 
@@ -64,12 +65,9 @@ export class AuthService {
     });
   }
 
-  profile(token: string){
-    return this.http.get(`${this.apiUrl}api/v1/auth/profile`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).pipe(
+  profile(){
+    const token = this.sessionService.getToken()
+    return this.http.get(`${this.apiUrl}api/v1/auth/profile`).pipe(
       tap((response:any) => {
         this.user$.next(response)
       })

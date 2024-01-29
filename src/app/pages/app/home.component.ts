@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { RouterOutlet } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -17,5 +18,17 @@ import { RouterOutlet } from '@angular/router';
   `
 })
 export class HomeComponent {
+  authService = inject(AuthService)
 
+  ngOnInit(){
+    this.authService.profile().subscribe({
+      next: (response) => {
+        console.log(response)
+        this.authService.user$.next(response)
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
 }
