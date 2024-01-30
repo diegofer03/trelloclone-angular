@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
 import { DialogComponent } from '../../../components/dialog/dialog.component';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -44,6 +44,8 @@ import { RouterLink } from '@angular/router';
 })
 export class BoardComponent {
   dialog = inject(Dialog)
+  route = inject(ActivatedRoute)
+  router = inject(Router)
 
   newColumn = new FormControl('', {
     nonNullable: true,
@@ -51,6 +53,8 @@ export class BoardComponent {
       Validators.required,
     ]
   })
+
+  boardId = ''
 
   columns : column[] = [
     {
@@ -96,6 +100,13 @@ export class BoardComponent {
       ]
     },
   ]
+
+  ngOnInit(){
+    this.route.queryParamMap.subscribe((params:any)=>{
+      if(params.params.id) this.boardId = params.params.id
+      else this.router.navigate(['/home/boards'])
+    })
+  }
 
   addColumn(){
     if(this.newColumn.valid){

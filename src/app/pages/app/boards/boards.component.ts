@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { faTrello } from '@fortawesome/free-brands-svg-icons';
 import { faAngleDown, faAngleUp, faBorderAll, faBox, faClock, faGear, faHeart, faUsers, faWaveSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ProfileService } from '../../../services/profile.service';
+import { Board } from '../../../models/app.models';
 
 @Component({
   selector: 'app-boards',
@@ -14,6 +16,9 @@ import { RouterLink } from '@angular/router';
   templateUrl: './boards.component.html'
 })
 export class BoardsComponent {
+  profileService = inject(ProfileService)
+
+  boards: Board [] = []
   faTrello = faTrello
   faBox = faBox
   faWaveSqueare = faWaveSquare
@@ -25,31 +30,43 @@ export class BoardsComponent {
   faHeart = faHeart
   faUsers = faUsers
 
-  items = [
-    {
-      label: 'item 1',
-      subItems: [
-        {
-          label: 'sub item 1'
-        },
-        {
-          label: 'sub item 2'
-        }
-      ]
-    },
-    {
-      label: 'item 2',
-      subItems: [
-        {
-          label: 'sub item 1'
-        },
-        {
-          label: 'sub item 2'
-        }
-      ]
-    },
-    {
-      label: 'item 3'
-    }
-  ]
+  // items = [
+  //   {
+  //     label: 'item 1',
+  //     subItems: [
+  //       {
+  //         label: 'sub item 1'
+  //       },
+  //       {
+  //         label: 'sub item 2'
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     label: 'item 2',
+  //     subItems: [
+  //       {
+  //         label: 'sub item 1'
+  //       },
+  //       {
+  //         label: 'sub item 2'
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     label: 'item 3'
+  //   }
+  // ]
+
+  ngOnInit(){
+    this.profileService.getBoards().subscribe({
+      next: (response) =>{
+        console.log(response)
+        this.boards = response
+      },
+      error: error => {
+        console.log(error)
+      }
+    })
+  }
 }
