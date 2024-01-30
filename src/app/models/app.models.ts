@@ -28,3 +28,10 @@ export interface User {
   email: string;
   avatar: string;
 }
+
+export interface Board {
+  id: string;
+  title: string;
+  backgroundColor: string;
+  members: User[];
+}
