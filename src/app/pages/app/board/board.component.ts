@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
 import { DialogComponent } from '../../../components/dialog/dialog.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [NavbarComponent, DragDropModule, DialogModule, CdkDropList, CdkDrag, CommonModule, CdkDropListGroup, ReactiveFormsModule],
+  imports: [NavbarComponent, DragDropModule, DialogModule, CdkDropList, CdkDrag, CommonModule,
+    CdkDropListGroup, ReactiveFormsModule, RouterLink],
   templateUrl: './board.component.html',
   styles: [
     `

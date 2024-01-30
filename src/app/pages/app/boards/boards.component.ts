@@ -5,11 +5,12 @@ import { faAngleDown, faAngleUp, faBorderAll, faBox, faClock, faGear, faHeart, f
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-boards',
   standalone: true,
-  imports: [NavbarComponent, FontAwesomeModule, CdkAccordionModule, CommonModule],
+  imports: [NavbarComponent, FontAwesomeModule, CdkAccordionModule, CommonModule, RouterLink],
   templateUrl: './boards.component.html'
 })
 export class BoardsComponent {
