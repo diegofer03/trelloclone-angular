@@ -17,6 +17,8 @@ export interface Product {
 
 export type status = 'init' | 'success' | 'failed' | 'loading'
 
+export type ColorCard = 'sky' | 'yellow' | 'green' | 'red' | 'violet' | 'gray'
+
 export interface ResponseLogin {
   access_token: string;
   refresh_token: string;
@@ -32,6 +34,6 @@ export interface User {
 export interface Board {
   id: string;
   title: string;
-  backgroundColor: 'sky' | 'yellow' | 'green' | 'red' | 'violet' | 'gray';
+  backgroundColor: ColorCard;
   members: User[];
 }

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { ColorCard } from '../../models/app.models';
 
 @Component({
   selector: 'card-color',
@@ -9,7 +10,7 @@ import { Component, Input } from '@angular/core';
 })
 export class CardColorComponent {
 
-  @Input() color!: keyof typeof this.mapColors;
+  @Input() color: ColorCard = 'sky';
 
   mapColors = {
     sky: 'bg-sky-700 hover:bg-sky-800 text-white',
