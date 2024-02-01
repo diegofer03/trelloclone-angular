@@ -13,11 +13,11 @@ export class CardColorComponent {
 
   mapColors = {
     sky: 'bg-sky-700 hover:bg-sky-800 text-white',
-    yellow: 'bg-sky-700 hover:bg-sky-800 text-white',
+    yellow: 'bg-yellow-700 hover:bg-yellow-800 text-white',
     green: 'bg-green-700 hover:bg-green-800 text-white',
-    red: 'bg-green-700 hover:bg-green-800 text-white',
-    violet: 'bg-sky-700 hover:bg-sky-800 text-white',
-    gray: 'bg-green-700 hover:bg-green-800 text-white',
+    red: 'bg-red-700 hover:bg-red-800 text-white',
+    violet: 'bg-violet-700 hover:bg-violet-800 text-white',
+    gray: 'bg-gray-700 hover:bg-gray-800 text-white',
   }
 
   get colors() {
