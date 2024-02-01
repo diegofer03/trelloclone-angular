@@ -8,11 +8,12 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ProfileService } from '../../../services/profile.service';
 import { Board } from '../../../models/app.models';
+import { CardColorComponent } from '../../../components/card-color/card-color.component';
 
 @Component({
   selector: 'app-boards',
   standalone: true,
-  imports: [NavbarComponent, FontAwesomeModule, CdkAccordionModule, CommonModule, RouterLink],
+  imports: [NavbarComponent, FontAwesomeModule, CdkAccordionModule, CommonModule, RouterLink, CardColorComponent],
   templateUrl: './boards.component.html'
 })
 export class BoardsComponent {

@@ -32,6 +32,6 @@ export interface User {
 export interface Board {
   id: string;
   title: string;
-  backgroundColor: string;
+  backgroundColor: 'sky' | 'yellow' | 'green' | 'red' | 'violet' | 'gray';
   members: User[];
 }

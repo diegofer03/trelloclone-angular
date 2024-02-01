@@ -79,8 +79,10 @@
     <h1 class="text-lg font-bold mb-4"> <fa-icon [icon]="faClock"/> Recently viewed </h1>
     <div class="grid grid-cols-4 gap-4">
       <a [routerLink]="['/home/board']" [queryParams]="{ id: board.id }" *ngFor="let board of boards"
-      class="w-full bg-sky-700 px-4 py-2 rounded text-white font-bold h-24">
-        {{board.title}}
+      class="">
+        <card-color [color]="board.backgroundColor">
+          {{board.title}}
+        </card-color>
       </a>
       <!-- <div routerLink="/home/board" class="w-full bg-green-700 px-4 py-2 rounded text-white font-bold h-24">Board 1</div>
       <div routerLink="/home/board" class="w-full bg-amber-700 px-4 py-2 rounded text-white font-bold h-24">Board 1</div>
