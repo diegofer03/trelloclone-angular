@@ -88,10 +88,15 @@ export class BoardComponent {
   }
 
   drop(event: CdkDragDrop<Card[]>) {
-    if(event.container === event.previousContainer) moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+
+    if(event.container === event.previousContainer) moveItemInArray(event.container.data,
+      event.previousIndex, event.currentIndex);
     else{
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex,
+        event.currentIndex)
     }
+    const position = this.boardsService.getPosition(event.container.data, event.currentIndex)
+    console.log(position)
   }
 
   openDialog(card: Card, list: string) {
