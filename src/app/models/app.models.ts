@@ -37,3 +37,27 @@ export interface Board {
   backgroundColor: ColorCard;
   members: User[];
 }
+
+export interface Card {
+  id: string;
+  title: string;
+  description: string;
+  position: number;
+  list: List;
+}
+
+export interface List {
+  id: string;
+  title: string;
+  position: number;
+  cards: Card[];
+}
+
+export interface Board {
+  id: string;
+  title: string;
+  backgroundColor: ColorCard;
+  members: User[];
+  lists: List[];
+  cards: Card[];
+}

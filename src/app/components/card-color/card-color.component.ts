@@ -23,7 +23,6 @@ export class CardColorComponent {
 
   get colors() {
     const classes = this.mapColors[this.color];
-    console.log(classes)
     return classes ? classes : {};
   }
 

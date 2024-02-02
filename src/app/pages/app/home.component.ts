@@ -23,7 +23,6 @@ export class HomeComponent {
   ngOnInit(){
     this.authService.profile().subscribe({
       next: (response) => {
-        console.log(response)
         this.authService.user$.next(response)
       },
       error: (error) => {

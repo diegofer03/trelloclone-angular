@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { column, todo } from '../../../models/app.models';
+import { Board, Card, column, todo } from '../../../models/app.models';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
 import { DialogComponent } from '../../../components/dialog/dialog.component';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { BoardsService } from '../../../services/boards.service';
 
 @Component({
   selector: 'app-board',
@@ -46,6 +47,7 @@ export class BoardComponent {
   dialog = inject(Dialog)
   route = inject(ActivatedRoute)
   router = inject(Router)
+  boardsService = inject(BoardsService)
 
   newColumn = new FormControl('', {
     nonNullable: true,
@@ -54,83 +56,50 @@ export class BoardComponent {
     ]
   })
 
-  boardId = ''
-
-  columns : column[] = [
-    {
-      title: 'todos',
-      todo: [
-        {
-          id: '1',
-          title: 'Make dishes'
-        },
-        {
-          id: '2',
-          title: 'Buy a unicorn'
-        },
-        {
-          id: '3',
-          title: 'Watch Angular Path in Platzi'
-        }
-      ]
-    },
-    {
-      title: 'doing',
-      todo: [
-        {
-          id: '1', title:'Get to work'
-        },
-        {
-          id: '2', title:'Pick up groceries'
-        }
-      ]
-    },
-    {
-      title: 'done',
-      todo: [
-        {
-          id: '1', title:'Get up'
-        },
-        {
-          id: '2', title:'Brush teeth'
-        },
-        {
-          id: '3', title:'Take a shower'
-        }
-      ]
-    },
-  ]
+  board : Board | null = null
 
   ngOnInit(){
     this.route.queryParamMap.subscribe((params:any)=>{
-      if(params.params.id) this.boardId = params.params.id
+      if(params.params.id) this.getBoardData(params.params.id)
       else this.router.navigate(['/home/boards'])
     })
   }
 
-  addColumn(){
-    if(this.newColumn.valid){
-      this.columns.push({
-        title: this.newColumn.value,
-        todo: []
-      })
-      this.newColumn.setValue('')
-    }
+  private getBoardData(id : Board['id']){
+    this.boardsService.getBoard(id).subscribe({
+      next: (data: any) => {
+        console.log(data)
+        this.board = data
+      },
+      error: error => {
+        console.log(error)
+      }
+    })
   }
 
-  drop(event: CdkDragDrop<any[]>) {
+  addColumn(){
+    // if(this.newColumn.valid){
+    //   this.columns.push({
+    //     title: this.newColumn.value,
+    //     todo: []
+    //   })
+    //   this.newColumn.setValue('')
+    // }
+  }
+
+  drop(event: CdkDragDrop<Card[]>) {
     if(event.container === event.previousContainer) moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     else{
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex)
     }
   }
 
-  openDialog(todo: todo, list: string) {
+  openDialog(card: Card, list: string) {
     const ref = this.dialog.open(DialogComponent, {
       minWidth: '300px',
       maxWidth : '50%',
       data: {
-        todo: todo,
+        card: card,
         list: list
       }
     });

@@ -3,10 +3,10 @@ import {DIALOG_DATA, DialogRef} from '@angular/cdk/dialog';
 import { faClose, faCheckToSlot, faBars, faUser, faTag, faCheckSquare, faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonComponent } from '../button/button.component';
-import { todo } from '../../models/app.models';
+import { Card, todo } from '../../models/app.models';
 
 interface InputData {
-  todo: todo;
+  card: Card;
   list: string
 }
 
@@ -28,12 +28,12 @@ export class DialogComponent {
   faTag = faTag;
   faCheckSquare = faCheckSquare;
   faClock = faClock;
-  todo: todo
+  card: Card
   listTitle: string
   dialogRef = inject(DialogRef<OutputData>)
 
   constructor(@Inject(DIALOG_DATA) data: InputData){
-    this.todo = data.todo
+    this.card = data.card
     this.listTitle = data.list
   }
 
