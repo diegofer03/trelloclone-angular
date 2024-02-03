@@ -27,7 +27,9 @@
               >
             </li>
             <li>
-              <app-button typeBtn="button" >Create</app-button>
+              <app-button typeBtn="button" cdkOverlayOrigin
+              #createMenu="cdkOverlayOrigin"
+              (click)="isCreate = !isCreate">Create</app-button>
             </li>
           </ul>
         </div>
@@ -119,6 +121,22 @@
           <button class="block py-2 px-4 text-sm text-gray-700" (click)="logout()">Log out</button>
         </li>
       </ul>
+    </div>
+  </ng-template>
+
+  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="createMenu"
+  [cdkConnectedOverlayOpen]="isCreate" [cdkConnectedOverlayHasBackdrop]="true"
+  (backdropClick)="isCreate = false" [cdkConnectedOverlayBackdropClass]="'cdk-overlay-transparent-backdrop'"
+  (detach)="isOpen = false">
+  <div
+    class="z-50 my-4 w-60 text-base list-none bg-white rounded divide-y divide-gray-100 shadow "
+    >
+      <div class="py-3 px-4 flex justify-between">
+        <span class="block text-sm text-center text-gray-900">Create</span>
+      </div>
+      <div class="py-3 px-4 flex items-center space-x-4">
+        <app-create-board/>
+      </div>
     </div>
   </ng-template>
 </ng-container>

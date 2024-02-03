@@ -18,7 +18,7 @@ export class SessionService {
 
   getToken(){
     // const token = this.cookieService.get('token')
-    const token = getCookie('token',{})
+    const token = getCookie('token')
     return token
   }
 
