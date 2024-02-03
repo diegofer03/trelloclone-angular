@@ -8,6 +8,7 @@ import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
 import { DialogComponent } from '../../../components/dialog/dialog.component';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BoardsService } from '../../../services/boards.service';
+import { CardService } from '../../../services/card.service';
 
 @Component({
   selector: 'app-board',
@@ -48,6 +49,7 @@ export class BoardComponent {
   route = inject(ActivatedRoute)
   router = inject(Router)
   boardsService = inject(BoardsService)
+  cardService = inject(CardService)
 
   newColumn = new FormControl('', {
     nonNullable: true,
@@ -95,8 +97,16 @@ export class BoardComponent {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex,
         event.currentIndex)
     }
+    const card = event.container.data[event.currentIndex]
     const position = this.boardsService.getPosition(event.container.data, event.currentIndex)
-    console.log(position)
+    this.cardService.getBoard(card.id, {position}).subscribe({
+      next: data => {
+        console.log(data)
+      },
+      error: error => {
+        console.log(error)
+      }
+    })
   }
 
   openDialog(card: Card, list: string) {
