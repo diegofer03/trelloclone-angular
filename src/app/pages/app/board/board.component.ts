@@ -67,18 +67,6 @@ export class BoardComponent {
     })
   }
 
-  private getBoardData(id : Board['id']){
-    this.boardsService.getBoard(id).subscribe({
-      next: (data: any) => {
-        console.log(data)
-        this.board = data
-      },
-      error: error => {
-        console.log(error)
-      }
-    })
-  }
-
   addColumn(){
     // if(this.newColumn.valid){
     //   this.columns.push({
@@ -99,14 +87,8 @@ export class BoardComponent {
     }
     const card = event.container.data[event.currentIndex]
     const position = this.boardsService.getPosition(event.container.data, event.currentIndex)
-    this.cardService.getBoard(card.id, {position}).subscribe({
-      next: data => {
-        console.log(data)
-      },
-      error: error => {
-        console.log(error)
-      }
-    })
+    const listId = event.container.id;
+    this.updateBoardData(card, position, listId);
   }
 
   openDialog(card: Card, list: string) {
@@ -120,6 +102,29 @@ export class BoardComponent {
     });
     ref.closed.subscribe(data => {
       console.log(data)
+    })
+  }
+
+  private getBoardData(id : Board['id']){
+    this.boardsService.getBoard(id).subscribe({
+      next: (data: any) => {
+        console.log(data)
+        this.board = data
+      },
+      error: error => {
+        console.log(error)
+      }
+    })
+  }
+
+  private updateBoardData(card: Card, position: number, listId: string | number){
+    this.cardService.getBoard(card.id, {position, listId}).subscribe({
+      next: data => {
+        console.log(data)
+      },
+      error: error => {
+        console.log(error)
+      }
     })
   }
 }

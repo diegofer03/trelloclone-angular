@@ -50,7 +50,7 @@ export interface UpdateCardDto {
   title?: string;
   description?: string;
   position?: number;
-  listId?: string;
+  listId?: string | number;
   boardId?: string;
 }
 
