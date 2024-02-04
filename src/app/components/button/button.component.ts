@@ -19,7 +19,8 @@ export class ButtonComponent {
   get colors(){
     return{
       'bg-success' : this.bg === "success",
-      'bg-blue-400' : this.bg === ''
+      'bg-blue-400' : this.bg === '',
+      'bg-gray-400 cursor-not-allowed' : this.disabled === true
     }
   }
 }
