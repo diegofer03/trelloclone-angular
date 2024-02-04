@@ -105,6 +105,11 @@ export class BoardComponent {
     })
   }
 
+  ngOnDestroy(){
+    console.log('aber')
+    this.boardsService.resetColor()
+  }
+
   private getBoardData(id : Board['id']){
     this.boardsService.getBoard(id).subscribe({
       next: (data: any) => {

@@ -17,7 +17,7 @@ export interface Product {
 
 export type status = 'init' | 'success' | 'failed' | 'loading'
 
-export type ColorCard = 'sky' | 'yellow' | 'green' | 'red' | 'violet' | 'gray'
+export type ColorCard = 'home' |'sky' | 'yellow' | 'green' | 'red' | 'violet' | 'gray'
 
 export interface ResponseLogin {
   access_token: string;

@@ -13,6 +13,7 @@ export class CardColorComponent {
   @Input() color: ColorCard = 'sky';
 
   mapColors = {
+    home: '',
     sky: 'bg-sky-700 hover:bg-sky-800 text-white',
     yellow: 'bg-yellow-700 hover:bg-yellow-800 text-white',
     green: 'bg-green-700 hover:bg-green-800 text-white',

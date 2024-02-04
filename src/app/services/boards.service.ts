@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Board, Card } from '../models/app.models';
+import { Board, Card, ColorCard } from '../models/app.models';
 import { enviroment } from '../../enviroments/enviroment';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,20 @@ export class BoardsService {
   private http = inject(HttpClient)
   private apiUrl = enviroment.API_URL
   private bufferSpace = 65535
+  color$ = new BehaviorSubject<ColorCard | null>(null)
 
   constructor() { }
 
   getBoard(id : Board['id']){
-    return this.http.get(`${this.apiUrl}api/v1/boards/${id}`)
+    return this.http.get<Board>(`${this.apiUrl}api/v1/boards/${id}`).pipe(
+      tap((response) => {
+        this.color$.next(response.backgroundColor)
+      })
+      )
+  }
+
+  resetColor(){
+    this.color$.next(null)
   }
 
   getPosition(cards: Card[], currentIndex: number){

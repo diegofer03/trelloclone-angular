@@ -1,12 +1,12 @@
 <ng-container *ngIf=" user$ | async as user ">
-  <nav class="bg-sky-700 border-gray-200 px-6 shadow-md">
+  <nav class=" border-gray-200 px-6 shadow-md" [ngClass]="colorBg">
     <div class="flex flex-wrap justify-between items-center">
       <div class="flex items-center">
         <a routerLink="/home/boards">
           <img
             loading="lazy"
             class="w-20 mr-8"
-            src="./../../../assets/images/trello-logo-gradient-white-attribution_rgb@2x.png"
+            src="{{ color ? './../../../assets/images/trello-logo-gradient-white-attribution_rgb@2x.png' :'./../../../assets/images/trello-logo-gradient-neutral-attribution_rgb@2x.png'}}"
             alt="logo"
           />
         </a>
@@ -15,30 +15,32 @@
             <li>
               <a
                 routerLink="table"
-                class="block py-3 px-4 text-white"
+                class="block py-3 px-4 "
                 >Workspaces</a
               >
             </li>
             <li>
               <a
                 routerLink="scroll"
-                class="block py-3 px-4 text-white"
+                class="block py-3 px-4"
                 >Recent</a
               >
             </li>
             <li>
               <app-button typeBtn="button" cdkOverlayOrigin
-              #createMenu="cdkOverlayOrigin"
-              (click)="isCreate = !isCreate">Create</app-button>
+              #createMenu="cdkOverlayOrigin" [bg]=" color ? 'transparent' : ''"
+              (click)="isCreate = !isCreate">
+                  Create
+              </app-button>
             </li>
           </ul>
         </div>
       </div>
       <div class="flex items-center gap-x-2">
-        <button class="text-white">
+        <button class="">
           <fa-icon [icon]="faBell"/>
         </button>
-        <button class="text-white">
+        <button class="">
           <fa-icon [icon]="faInfoCircle"/>
         </button>
         <button

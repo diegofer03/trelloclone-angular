@@ -23,6 +23,7 @@ export class CreateBoardComponent {
   })
 
   mapColors = {
+    home: '',
     sky: 'bg-sky-700',
     yellow: 'bg-yellow-700',
     green: 'bg-green-700',
@@ -37,8 +38,6 @@ export class CreateBoardComponent {
     const classes = this.mapColors[color]
     return classes ? classes : {};
   }
-
-
 
   save(){
     console.log(this.createForm)

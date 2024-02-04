@@ -20,7 +20,8 @@ export class ButtonComponent {
     return{
       'bg-success' : this.bg === "success",
       'bg-blue-400' : this.bg === '',
-      'bg-gray-400 cursor-not-allowed' : this.disabled === true
+      'bg-gray-400 cursor-not-allowed' : this.disabled === true,
+      'bg-opacity-30 bg-gray-50' : this.bg === 'transparent'
     }
   }
 }
