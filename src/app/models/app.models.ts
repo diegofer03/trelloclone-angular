@@ -41,9 +41,14 @@ export interface Board {
 export interface Card {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   position: number;
   list: List;
+}
+
+export interface CardCreate extends Omit<Card, 'id' | 'list'>{
+  boardId: string,
+  listId: string
 }
 
 export interface UpdateCardDto {

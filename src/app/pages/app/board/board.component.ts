@@ -168,7 +168,7 @@ export class BoardComponent {
   }
 
   private updateBoardData(card: Card, position: number, listId: string | number){
-    this.cardService.getBoard(card.id, {position, listId}).subscribe({
+    this.cardService.updateCard(card.id, {position, listId}).subscribe({
       next: data => {
       },
       error: error => {
