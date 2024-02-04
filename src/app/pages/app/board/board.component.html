@@ -16,6 +16,21 @@
             {{card.title | titlecase}}
           </div>
         </div>
+        <div class="mt-5">
+          <app-button bg="transparent" *ngIf="!list.showAdd" color="light" (click)="openAdd(list)"> <span class="text-black">Add Board</span></app-button>
+          <div *ngIf="list.showAdd">
+            <div class="bg-white shadow p-2 rounded my-2 w-full border-b border-x-gray-300">
+              <input [formControl]="formCard" placeholder="Enter title for card..." type="text"
+              class="blur:blur-none border-transparent focus:border-transparent focus:ring-0 text-sm">
+            </div>
+            <div class="flex space-x-2">
+              <app-button (click)="addCard(list)">Add card</app-button>
+              <fa-icon class="text-xl hover:bg-gray-300  px-2 rounded" (click)="list.showAdd = false"
+              [icon]="faXmark"
+              ></fa-icon>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0 flex flex-col items-start">
         <input [formControl]="newColumn" class="w-full rounded border-none" type="text" placeholder="Enter list title">

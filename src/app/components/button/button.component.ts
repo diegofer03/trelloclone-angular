@@ -21,7 +21,7 @@ export class ButtonComponent {
       'bg-success' : this.bg === "success",
       'bg-blue-400' : this.bg === '',
       'bg-gray-400 cursor-not-allowed' : this.disabled === true,
-      'bg-opacity-30 bg-gray-50' : this.bg === 'transparent'
+      'bg-opacity-30 bg-gray-50 hover:bg-opacity-60' : this.bg === 'transparent'
     }
   }
 }

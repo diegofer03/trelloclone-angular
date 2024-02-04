@@ -59,6 +59,7 @@ export interface List {
   title: string;
   position: number;
   cards: Card[];
+  showAdd?: boolean
 }
 
 export interface Board {

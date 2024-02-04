@@ -1,20 +1,24 @@
 import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { Board, Card, ColorCard, column, todo } from '../../../models/app.models';
+import { Board, Card, ColorCard, List, column, todo } from '../../../models/app.models';
 import { CommonModule } from '@angular/common';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
 import { DialogComponent } from '../../../components/dialog/dialog.component';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { BoardsService } from '../../../services/boards.service';
 import { CardService } from '../../../services/card.service';
+import { ButtonComponent } from '../../../components/button/button.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCross, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [NavbarComponent, DragDropModule, DialogModule, CdkDropList, CdkDrag, CommonModule,
-    CdkDropListGroup, ReactiveFormsModule, RouterLink],
+  imports: [NavbarComponent, DragDropModule, DialogModule, CdkDropList, CdkDrag, CommonModule, FormsModule, CdkAccordionModule,
+    CdkDropListGroup, ReactiveFormsModule, RouterLink, ButtonComponent, ReactiveFormsModule, FontAwesomeModule],
   templateUrl: './board.component.html',
   styles: [
     `
@@ -48,10 +52,19 @@ export class BoardComponent {
   dialog = inject(Dialog)
   route = inject(ActivatedRoute)
   router = inject(Router)
+  formBuilder = inject(FormBuilder)
   boardsService = inject(BoardsService)
   cardService = inject(CardService)
+  faXmark = faXmark
 
   newColumn = new FormControl('', {
+    nonNullable: true,
+    validators: [
+      Validators.required,
+    ]
+  })
+
+  formCard = new FormControl<string>('', {
     nonNullable: true,
     validators: [
       Validators.required,
@@ -93,6 +106,15 @@ export class BoardComponent {
     // }
   }
 
+  addCard(list: List){
+    if(this.formCard.valid){
+      const card = this.formCard.value
+      console.log(card)
+    }else{
+      list.showAdd= false
+    }
+  }
+
   drop(event: CdkDragDrop<Card[]>) {
 
     if(event.container === event.previousContainer) moveItemInArray(event.container.data,
@@ -118,6 +140,16 @@ export class BoardComponent {
     });
     ref.closed.subscribe(data => {
     })
+  }
+
+  openAdd(list : List){
+    console.log(list)
+    if(this.board?.lists){
+      this.board.lists.map(all => {
+        if(all.id === list.id) list.showAdd = true
+        else all.showAdd = false
+      })
+    }
   }
 
   ngOnDestroy(){
