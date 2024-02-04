@@ -137,7 +137,7 @@
         <span class="block text-sm font-semibold text-center text-gray-900">Create Bord</span>
       </div>
       <div class="py-3 px-4 flex items-center space-x-4">
-        <app-create-board/>
+        <app-create-board (closeOverlay)="closeOnCreate()"/>
       </div>
     </div>
   </ng-template>

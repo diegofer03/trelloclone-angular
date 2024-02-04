@@ -117,19 +117,16 @@ export class BoardComponent {
       }
     });
     ref.closed.subscribe(data => {
-      console.log(data)
     })
   }
 
   ngOnDestroy(){
-    console.log('aber')
     this.boardsService.resetColor()
   }
 
   private getBoardData(id : Board['id']){
     this.boardsService.getBoard(id).subscribe({
       next: (data: any) => {
-        console.log(data)
         this.board = data
       },
       error: error => {
@@ -141,7 +138,6 @@ export class BoardComponent {
   private updateBoardData(card: Card, position: number, listId: string | number){
     this.cardService.getBoard(card.id, {position, listId}).subscribe({
       next: data => {
-        console.log(data)
       },
       error: error => {
         console.log(error)

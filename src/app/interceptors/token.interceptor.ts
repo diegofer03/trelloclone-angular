@@ -17,8 +17,6 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   }else{
     const refreshToken = inject(SessionService).getRefreshToken();
     const isValidRefreshToken = inject(SessionService).isRefreshValid();
-    console.log(refreshToken )
-    console.log(isValidRefreshToken)
     if (refreshToken && isValidRefreshToken) {
       return authService.refreshToken(refreshToken)
       .pipe(

@@ -64,7 +64,6 @@ export class SessionService {
       const tokenDate = new Date(0)
       tokenDate.setUTCSeconds(decodeToken.exp)
       const now = new Date()
-      console.log('refresh valid',tokenDate.getTime() > now.getTime())
       return tokenDate.getTime() > now.getTime()
     }
     return false

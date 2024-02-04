@@ -1,11 +1,13 @@
-import { Component, effect, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, EventEmitter, Output, effect, inject, signal } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { map } from 'rxjs';
 import { ColorCard } from '../../models/app.models';
 import { CommonModule } from '@angular/common';
+import { BoardsService } from '../../services/boards.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-board',
@@ -15,10 +17,17 @@ import { CommonModule } from '@angular/common';
 })
 export class CreateBoardComponent {
   formBuilder = inject(FormBuilder)
+  boardService = inject(BoardsService)
+  router = inject(Router)
   faCheck = faCheck
 
-  createForm = this.formBuilder.group({
-    backgroundColor: ['', Validators.required],
+  @Output() closeOverlay = new EventEmitter<boolean>()
+
+  createForm = this.formBuilder.nonNullable.group({
+    backgroundColor: new FormControl<ColorCard>('home', {
+      validators: [Validators.required],
+      nonNullable: true
+    }),
     title: ['', Validators.required]
   })
 
@@ -40,10 +49,17 @@ export class CreateBoardComponent {
   }
 
   save(){
-    console.log(this.createForm)
     if(this.createForm.valid){
       const {backgroundColor, title} = this.createForm.getRawValue()
-      console.log(backgroundColor, title)
+      this.boardService.createBoard(title, backgroundColor).subscribe({
+        next: data =>{
+          this.closeOverlay.next(false)
+          this.router.navigate(['/home/board'],{ queryParams: { id: data.id } })
+        },
+        error: error => {
+
+        }
+      })
     }
   }
 }

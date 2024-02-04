@@ -58,6 +58,10 @@ export class NavbarComponent {
     return classes ? classes : {};
   }
 
+  closeOnCreate(){
+    this.isCreate = false
+  }
+
   logout(){
     this.authService.logout()
     this.router.navigate(['/login'])

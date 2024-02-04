@@ -62,7 +62,6 @@ export class BoardsComponent {
   ngOnInit(){
     this.profileService.getBoards().subscribe({
       next: (response) =>{
-        console.log(response)
         this.boards = response
       },
       error: error => {

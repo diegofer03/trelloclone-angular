@@ -23,6 +23,13 @@ export class BoardsService {
       )
   }
 
+  createBoard(title: string, backgroundColor: ColorCard){
+    return this.http.post<Board>(`${this.apiUrl}api/v1/boards/`,{
+      title,
+      backgroundColor
+    })
+  }
+
   resetColor(){
     this.color$.next(null)
   }
