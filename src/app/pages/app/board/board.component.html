@@ -17,7 +17,9 @@
           </div>
         </div>
         <div class="mt-5">
-          <app-button bg="transparent" *ngIf="!list.showAdd" color="light" (click)="openAdd(list)"> <span class="text-black">Add Board</span></app-button>
+          <app-button bg="transparent" *ngIf="!list.showAdd" color="light" (click)="openAdd(list)">
+            <span class="text-black flex"> <fa-icon class="mr-2" [icon]="faPlus" /> Add a card</span>
+          </app-button>
           <div *ngIf="list.showAdd">
             <div class="bg-white shadow p-2 rounded my-2 w-full border-b border-x-gray-300">
               <input [formControl]="formCard" placeholder="Enter title for card..." type="text"

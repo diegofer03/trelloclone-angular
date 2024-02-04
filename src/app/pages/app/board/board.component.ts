@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { Board, Card, ColorCard, List, column, todo } from '../../../models/app.models';
+import { Board, Card, CardCreate, ColorCard, List, column, todo } from '../../../models/app.models';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
@@ -11,7 +11,7 @@ import { BoardsService } from '../../../services/boards.service';
 import { CardService } from '../../../services/card.service';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCross, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCross, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 @Component({
@@ -56,6 +56,7 @@ export class BoardComponent {
   boardsService = inject(BoardsService)
   cardService = inject(CardService)
   faXmark = faXmark
+  faPlus = faPlus
 
   newColumn = new FormControl('', {
     nonNullable: true,
@@ -109,7 +110,22 @@ export class BoardComponent {
   addCard(list: List){
     if(this.formCard.valid){
       const card = this.formCard.value
-      console.log(card)
+      const payload : CardCreate = {
+        listId : list.id,
+        boardId: this.board!.id,
+        title: card,
+        position: this.boardsService.getNewCardPosition(list.cards)
+      }
+      this.cardService.createCard(payload).subscribe({
+        next: (data) => {
+          list.cards.push(data as Card)
+          this.formCard.setValue('')
+          list.showAdd = false
+        },
+        error: error => {
+          console.log(error)
+        }
+      })
     }else{
       list.showAdd= false
     }

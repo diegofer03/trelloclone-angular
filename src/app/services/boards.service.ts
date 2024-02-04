@@ -57,4 +57,11 @@ export class BoardsService {
     }
     return 0
   }
+
+  getNewCardPosition(cards: Card[]){
+    if(cards.length === 0) return this.bufferSpace
+    const lastIndex = cards.length - 1
+    const bottomPosition = cards[lastIndex].position
+    return bottomPosition + this.bufferSpace
+  }
 }
