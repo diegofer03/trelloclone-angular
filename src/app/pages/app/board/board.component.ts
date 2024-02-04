@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { Board, Card, column, todo } from '../../../models/app.models';
+import { Board, Card, ColorCard, column, todo } from '../../../models/app.models';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
@@ -59,6 +59,22 @@ export class BoardComponent {
   })
 
   board : Board | null = null
+
+  mapColors = {
+    home: '',
+    sky: 'bg-sky-600',
+    yellow: 'bg-yellow-600',
+    green: 'bg-green-600',
+    red: 'bg-red-600',
+    violet: 'bg-violet-600',
+    gray: 'bg-gray-600',
+  }
+
+  get colorBg(){
+    const color: ColorCard = (this.board?.backgroundColor != null ? this.board?.backgroundColor as ColorCard : 'home')
+    const classes = this.mapColors[color]
+    return classes ? classes : {};
+  }
 
   ngOnInit(){
     this.route.queryParamMap.subscribe((params:any)=>{
