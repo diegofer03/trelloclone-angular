@@ -8,6 +8,7 @@ import { tokenInterceptor } from './interceptors/token.interceptor';
 import { errorsInterceptor } from './interceptors/errors.interceptor';
 import { validTokenInterceptor } from './interceptors/valid-token.interceptor';
 import { SsrCookieService } from 'ngx-cookie-service-ssr';
+import { loadingInterceptor } from './interceptors/loading.interceptor';
 
 // provideHttpClient(withFetch())
 export const appConfig: ApplicationConfig = {
@@ -15,5 +16,5 @@ export const appConfig: ApplicationConfig = {
     withPreloading(PreloadAllModules)),
     // provideClientHydration(),
     SsrCookieService,
-    provideHttpClient(withInterceptors([errorsInterceptor, tokenInterceptor]))]
+    provideHttpClient(withInterceptors([errorsInterceptor, tokenInterceptor, loadingInterceptor]))]
 };
