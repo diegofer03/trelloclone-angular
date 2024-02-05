@@ -22,4 +22,9 @@ export default [
     title: 'table test',
     loadComponent: () => import('./table/table.component').then(m => m.TableComponent)
   },
+  {
+    path: 'profile',
+    title: 'profile',
+    loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent)
+  },
 ] as Routes ;

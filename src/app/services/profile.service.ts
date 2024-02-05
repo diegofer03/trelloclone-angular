@@ -7,8 +7,8 @@ import { Board, User } from '../models/app.models';
   providedIn: 'root'
 })
 export class ProfileService {
-  http = inject(HttpClient)
-  apiUrl = enviroment.API_URL
+  private http = inject(HttpClient)
+  private apiUrl = enviroment.API_URL
 
   constructor() { }
 
