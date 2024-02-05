@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBell, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faInfoCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -23,6 +23,7 @@ export class NavbarComponent {
   route = inject(ActivatedRoute)
   faBell = faBell
   faInfoCircle = faInfoCircle
+  faPlus = faPlus
   isOpen = false;
   isCreate = false
 
