@@ -6,10 +6,10 @@ import { Router } from '@angular/router';
 export const validTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const token = inject(SessionService).isValid();
   const router = inject(Router);
-  if(!token){
-    router.navigate(['/login']);
-    return next(req);
-  }
+  // if(!token){
+  //   router.navigate(['/login']);
+  //   return next(req);
+  // }
 
   return next(req);
 };

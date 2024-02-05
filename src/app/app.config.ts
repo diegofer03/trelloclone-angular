@@ -7,10 +7,13 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { tokenInterceptor } from './interceptors/token.interceptor';
 import { errorsInterceptor } from './interceptors/errors.interceptor';
 import { validTokenInterceptor } from './interceptors/valid-token.interceptor';
+import { SsrCookieService } from 'ngx-cookie-service-ssr';
+
 // provideHttpClient(withFetch())
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes,
     withPreloading(PreloadAllModules)),
     // provideClientHydration(),
-    provideHttpClient(withInterceptors([errorsInterceptor, tokenInterceptor, validTokenInterceptor]))]
+    SsrCookieService,
+    provideHttpClient(withInterceptors([errorsInterceptor, tokenInterceptor]))]
 };

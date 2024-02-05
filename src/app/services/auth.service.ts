@@ -29,7 +29,8 @@ export class AuthService {
   }
 
   refreshToken(refreshToken: string) {
-    return this.http.post(`${this.apiUrl}/api/v1/auth/refresh-token`, {refreshToken})
+    console.log('llamo')
+    return this.http.post(`${this.apiUrl}api/v1/auth/refresh-token`, {refreshToken})
     .pipe(
       tap((response:any) => {
         this.sessionService.saveToken(response.access_token)
