@@ -20,8 +20,8 @@ import { faTrello } from '@fortawesome/free-brands-svg-icons';
 })
 export class HomeComponent {
   authService = inject(AuthService)
-  favIcon: HTMLLinkElement | null = document.querySelector('#appIcon');
-  faTrello = faTrello
+  // favIcon: HTMLLinkElement | null = document.querySelector('#appIcon');
+  // faTrello = faTrello
   ngOnInit(){
     this.authService.profile().subscribe({
       next: (response) => {
@@ -31,6 +31,6 @@ export class HomeComponent {
         console.log(error)
       }
     })
-    this.favIcon!.href = 'https://w7.pngwing.com/pngs/115/721/png-transparent-trello-social-icons-icon-thumbnail.png'
+    // this.favIcon!.href = 'https://w7.pngwing.com/pngs/115/721/png-transparent-trello-social-icons-icon-thumbnail.png'
   }
 }

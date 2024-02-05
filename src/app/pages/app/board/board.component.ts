@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { Board, Card, CardCreate, ColorCard, List, column, todo } from '../../../models/app.models';
+import { Board, Card, CardCreate, ColorCard, List, ListCreate, column, todo } from '../../../models/app.models';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import {Dialog, DIALOG_DATA, DialogModule} from '@angular/cdk/dialog';
@@ -13,6 +13,7 @@ import { ButtonComponent } from '../../../components/button/button.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCross, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { ListsService } from '../../../services/lists.service';
 
 @Component({
   selector: 'app-board',
@@ -55,9 +56,11 @@ export class BoardComponent {
   formBuilder = inject(FormBuilder)
   boardsService = inject(BoardsService)
   cardService = inject(CardService)
+  listService = inject(ListsService)
   faXmark = faXmark
   faPlus = faPlus
 
+  showAddColumn: boolean = false
   newColumn = new FormControl('', {
     nonNullable: true,
     validators: [
@@ -98,13 +101,25 @@ export class BoardComponent {
   }
 
   addColumn(){
-    // if(this.newColumn.valid){
-    //   this.columns.push({
-    //     title: this.newColumn.value,
-    //     todo: []
-    //   })
-    //   this.newColumn.setValue('')
-    // }
+    if(this.newColumn.valid){
+      const title = this.newColumn.value
+      const payload : ListCreate = {
+        title: title,
+        boardId: this.board!.id,
+        position: this.boardsService.getNewItemPosition(this.board!.lists)
+      }
+      this.listService.createBoard(payload).subscribe({
+        next: (data: List) => {
+          this.board?.lists.push({...data, cards: []})
+          this.showAddColumn = false
+          this.newColumn.setValue('')
+        },
+        error: error =>{
+          console.log(error)
+        }
+      })
+
+    }
   }
 
   addCard(list: List){
@@ -114,7 +129,7 @@ export class BoardComponent {
         listId : list.id,
         boardId: this.board!.id,
         title: card,
-        position: this.boardsService.getNewCardPosition(list.cards)
+        position: this.boardsService.getNewItemPosition(list.cards)
       }
       this.cardService.createCard(payload).subscribe({
         next: (data) => {

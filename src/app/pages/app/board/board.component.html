@@ -34,9 +34,21 @@
           </div>
         </div>
       </div>
-      <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0 flex flex-col items-start">
-        <input [formControl]="newColumn" class="w-full rounded border-none" type="text" placeholder="Enter list title">
-        <button [ngClass]="colorBg" class=" mt-2 px-3 py-1 rounded text-sm font-semibold text-white" (click)="addColumn()">Add list</button>
+      <div>
+        <app-button bg="transparent" *ngIf="!showAddColumn" (click)="showAddColumn = true">
+          <span class="mr-28 w-full flex"> <fa-icon class="mr-2" [icon]="faPlus" /> Add another list</span>
+        </app-button>
+        <div *ngIf="showAddColumn">
+          <div class="rounded bg-gray-200 w-72 p-2 mr-3 shrink-0 flex flex-col items-start">
+            <input [formControl]="newColumn" class="w-full rounded border-none mb-2 text-sm" type="text" placeholder="Enter list title">
+            <div class="flex space-x-2">
+              <app-button (click)="addColumn()">Add list</app-button>
+              <fa-icon class="text-xl hover:bg-gray-300  px-2 rounded" (click)="showAddColumn = false"
+              [icon]="faXmark"
+              ></fa-icon>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 </div>

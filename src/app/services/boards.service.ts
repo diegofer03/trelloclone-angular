@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Board, Card, ColorCard } from '../models/app.models';
+import { Board, Card, ColorCard, List } from '../models/app.models';
 import { enviroment } from '../../enviroments/enviroment';
 import { BehaviorSubject, tap } from 'rxjs';
 
@@ -58,10 +58,10 @@ export class BoardsService {
     return 0
   }
 
-  getNewCardPosition(cards: Card[]){
-    if(cards.length === 0) return this.bufferSpace
-    const lastIndex = cards.length - 1
-    const bottomPosition = cards[lastIndex].position
+  getNewItemPosition(item: Card[] | List[]){
+    if(item.length === 0) return this.bufferSpace
+    const lastIndex = item.length - 1
+    const bottomPosition = item[lastIndex].position
     return bottomPosition + this.bufferSpace
   }
 }

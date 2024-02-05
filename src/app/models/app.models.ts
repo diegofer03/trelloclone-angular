@@ -67,6 +67,10 @@ export interface List {
   showAdd?: boolean
 }
 
+export interface ListCreate extends Omit<List, 'id' | 'cards'>{
+  boardId: string
+}
+
 export interface Board {
   id: string;
   title: string;
