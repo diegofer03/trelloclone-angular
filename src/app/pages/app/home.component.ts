@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { faTrello } from '@fortawesome/free-brands-svg-icons';
 
 
 @Component({
@@ -19,7 +20,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HomeComponent {
   authService = inject(AuthService)
-
+  favIcon: HTMLLinkElement | null = document.querySelector('#appIcon');
+  faTrello = faTrello
   ngOnInit(){
     this.authService.profile().subscribe({
       next: (response) => {
@@ -29,5 +31,6 @@ export class HomeComponent {
         console.log(error)
       }
     })
+    this.favIcon!.href = 'https://w7.pngwing.com/pngs/115/721/png-transparent-trello-social-icons-icon-thumbnail.png'
   }
 }
