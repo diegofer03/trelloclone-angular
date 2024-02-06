@@ -1,0 +1,41 @@
+<div class="w-full mt-10 px-4 sm:px-0 flex flex-col justify-center">
+  <div class="flex justify-center">
+    <img src="../../../../../../assets/svg/profilelock.svg" alt="">
+  </div>
+  <div class="flex justify-center text-start text-2xl font-medium my-10">
+    <h4 class="w-auto">Manage your personal information</h4>
+  </div>
+  <div class="flex justify-center">
+    <div class="w-[45%]">
+      <h5 class="text-xl font-normal mb-3">About</h5>
+      <mat-divider/>
+      <form class="w-1/2 my-5 flex flex-col space-y-7" [formGroup]="formProfile" (submit)="updateProfile()">
+        <div>
+          <h4 class="font-medium text-sm mb-2">Username</h4>
+          <div class="">
+            <input
+            formControlName="name"
+              name="name"
+              type="text"
+              class="w-full rounded text-sm bg-gray-100 border-gray-300 border-2"
+            />
+          </div>
+        </div>
+        <div>
+          <h4 class="font-medium text-sm mb-2">Avatar Url</h4>
+          <div class="">
+            <input
+              formControlName="avatar"
+              name="title"
+              type="text"
+              class="w-full text-sm rounded bg-gray-100 border-gray-300 border-2"
+            />
+          </div>
+        </div>
+        <div>
+          <app-button class="w-full" type="submit" > Save </app-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

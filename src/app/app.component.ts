@@ -8,7 +8,7 @@ import { UsersService } from './services/users.service';
   standalone: true,
   imports: [CommonModule, RouterOutlet],
   template: `
-  <div *ngIf="loading" class="w-screen block h-screen bg-gray-500 opacity-70 absolute z-50">
+  <div *ngIf="loading" class="w-screen block h-screen bg-gray-500 opacity-70 fixed z-50">
 
   </div>
   <router-outlet/>`

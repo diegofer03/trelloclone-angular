@@ -20,6 +20,10 @@ export class ProfileService {
     return this.http.get<Board[]>(`${this.apiUrl}api/v1/me/boards`)
   }
 
+  updateProfile(name: string, avatar: string, id: string){
+    return this.http.put(`${this.apiUrl}api/v1/users/${id}`, {name, avatar})
+  }
+
   getOneBoard(){
 
   }

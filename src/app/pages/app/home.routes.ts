@@ -19,12 +19,12 @@ export default [
   },
   {
     path: 'table',
-    title: 'table test',
+    title: 'Table test',
     loadComponent: () => import('./table/table.component').then(m => m.TableComponent)
   },
   {
     path: 'profile',
-    title: 'profile',
+    title: 'Profile',
     loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent)
   },
 ] as Routes ;
