@@ -5,8 +5,11 @@
   <div class="flex space-x-2 mb-5">
     <fa-icon class="text-gray-800" [icon]="faCheckToSlot"></fa-icon>
     <div class="flex flex-col">
-      <h3 class="text-lg font-semibold text-gray-800">{{card.title}}</h3>
-      <p class="text-sm text-gray-500">in list {{listTitle}}</p>
+      <h3 *ngIf="!editingTitle" class="text-lg font-semibold text-gray-800" (click)="editingTl()">{{card.title}}</h3>
+      <p *ngIf="!editingTitle" class="text-sm text-gray-500">in list {{listTitle}}</p>
+      <input class="w-full text-sm rounded bg-gray-100 border-gray-300 border-2" *ngIf="editingTitle"
+      type="text" [formControl]="editableTask"
+      (keydown.escape)="editingTitle = false" (blur)="editTl() "/>
     </div>
   </div>
   <div class="flex w-full gap-4">
@@ -14,8 +17,14 @@
       <fa-icon class="text-gray-800" [icon]="faBars"></fa-icon>
       <div class="flex flex-col">
         <h3 class="text-lg font-semibold text-gray-800">Description</h3>
-        <p class="text-sm text-gray-500">{{card.description}}</p>
-        <button (click)="closeWithRta(true)" >resend</button>
+        <app-button bg="transparent" *ngIf="!card.description && !editingDesc" (click)="editingDesc = true">
+          <span class=" w-full rounded bg-slate-400 flex p-2"> <fa-icon class="mr-2" [icon]="faPlus" /> Add description</span>
+        </app-button>
+        <p *ngIf="!editingDesc" class="text-sm text-gray-500" (click)="editingDc()">{{card.description}}</p>
+        <textarea class="w-[200%] resize-none text-sm rounded bg-gray-100 border-gray-300 border-2"
+        *ngIf="editingDesc" type="text" [formControl]="editableDesc"
+        (keydown.escape)="editingDesc = false" (blur)="editDc() "></textarea>
+        <!-- <button (click)="closeWithRta(true)" >resend</button> -->
       </div>
     </div>
     <div class="flex flex-auto space-y-2 flex-col">

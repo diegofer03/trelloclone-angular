@@ -16,5 +16,5 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withPreloading(PreloadAllModules)),
     // provideClientHydration(),
     SsrCookieService,
-    provideHttpClient(withInterceptors([errorsInterceptor, tokenInterceptor, loadingInterceptor])), provideAnimations()]
+    provideHttpClient(withInterceptors([errorsInterceptor, tokenInterceptor])), provideAnimations()]
 };

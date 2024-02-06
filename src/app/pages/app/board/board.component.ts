@@ -162,7 +162,7 @@ export class BoardComponent {
 
   openDialog(card: Card, list: string) {
     const ref = this.dialog.open(DialogComponent, {
-      minWidth: '300px',
+      minWidth: '50%',
       maxWidth : '50%',
       data: {
         card: card,
