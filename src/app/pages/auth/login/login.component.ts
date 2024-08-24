@@ -22,8 +22,8 @@ export default class LoginComponent {
   sessionService = inject(SessionService)
 
   form = this.formBuilder.nonNullable.group({
-    email: ['', [Validators.email, Validators.required]],
-    password: ['', [ Validators.required, Validators.minLength(6)]],
+    email: ['nicolas@mail.com', [Validators.email, Validators.required]],
+    password: ['changeme', [ Validators.required, Validators.minLength(6)]],
   });
 
   faPen = faPen;

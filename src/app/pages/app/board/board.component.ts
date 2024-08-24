@@ -14,6 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCross, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { ListsService } from '../../../services/lists.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-board',
@@ -51,6 +52,7 @@ import { ListsService } from '../../../services/lists.service';
 })
 export class BoardComponent {
   dialog = inject(Dialog)
+  titleService = inject(Title)
   route = inject(ActivatedRoute)
   router = inject(Router)
   formBuilder = inject(FormBuilder)
@@ -85,6 +87,10 @@ export class BoardComponent {
     red: 'bg-red-600',
     violet: 'bg-violet-600',
     gray: 'bg-gray-600',
+  }
+
+  constructor(){
+
   }
 
   get colorBg(){
@@ -191,6 +197,7 @@ export class BoardComponent {
     this.boardsService.getBoard(id).subscribe({
       next: (data: any) => {
         this.board = data
+        this.titleService.setTitle(this.board!.title)
       },
       error: error => {
         console.log(error)

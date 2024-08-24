@@ -3,7 +3,7 @@
     <h1 class="text-center font-semibold pt-4 pb-8">Log in to Trello</h1>
     <form action="" class="space-y-4 font-light" [formGroup]="form" (ngSubmit)="doLogin()">
       <div class="relative">
-        <input type="email" placeholder="Enter email" formControlName="email" #nameInput
+        <input type="email" placeholder="Enter email" [disabled]="true" formControlName="email" #nameInput
         class="w-full text-sm  rounded bg-[#fafbfc] border-2 border-gray-300">
         <button type="button" class="p-2 absolute right-2" (click)="nameInput.focus()">
           <fa-icon [icon]="faPen"></fa-icon>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="relative">
-        <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter password" formControlName="password"
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter password" [disabled]="true"  formControlName="password"
         class="w-full text-sm rounded bg-[#fafbfc] border-2 border-gray-300">
         <button type="button" class="p-2 absolute right-2" (click)="showPassword = !showPassword">
           <fa-icon [icon]="showPassword ? faEye : faEyeSlash"></fa-icon>
